@@ -24,8 +24,7 @@ static void _CommonInit(AJRImageView *self) {
 	[self setFrame:frame];
 
 	[self setLayerContentsRedrawPolicy:NSViewLayerContentsRedrawNever];
-	CATiledLayer *backingLayer = [CATiledLayer layer];
-	[backingLayer setTileSize:CGSizeMake(2048., 2048.)];
+	CALayer *backingLayer = [CALayer layer];
 	[backingLayer setAnchorPoint:CGPointMake(0., 0.)];
 	[backingLayer setFrame:[self bounds]];
 	[backingLayer setContents:image];
