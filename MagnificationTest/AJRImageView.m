@@ -9,8 +9,11 @@
 #import "AJRImageView.h"
 #import "AJRLayer.h"
 
+static NSString * const _AJRImageViewMagnificationContext = @"_AJRImageViewMagnificationContext";
+static NSString * const _AJRImageViewScrollViewMagnificationKey = @"magnification";
+
 @implementation AJRImageView {
-	//CALayer *_containerLayer;
+	CALayer *_containerLayer;
 	CGSize _imageSize;
 }
 
@@ -27,14 +30,20 @@ static void _CommonInit(AJRImageView *self) {
 	CALayer *backingLayer = [CALayer layer];
 	[backingLayer setAnchorPoint:CGPointMake(0., 0.)];
 	[backingLayer setFrame:[self bounds]];
-	[backingLayer setContents:image];
 	[backingLayer setBackgroundColor:[NSColor greenColor].CGColor];
 	
-	[backingLayer setLayoutManager:self];
-	[backingLayer setNeedsLayout];
 	[backingLayer setActions:@{kCATransition: [NSNull null], @"sublayers": [NSNull null]}];
 	[self setLayer:backingLayer];
 	[self setWantsLayer:YES];
+
+	self->_containerLayer = [CALayer layer];
+	[self->_containerLayer setAnchorPoint:CGPointZero];
+	[self->_containerLayer setFrame:CGRectMake(0., 0., self->_imageSize.width, self->_imageSize.height)];
+	[self->_containerLayer setContents:image];
+	[self->_containerLayer setActions:@{kCATransition: [NSNull null], @"sublayers": [NSNull null], @"transform" : [NSNull null]}];
+
+
+	[[self layer] addSublayer:self->_containerLayer];
 }
 
 - (id)initWithFrame:(NSRect)frameRect {
@@ -58,6 +67,10 @@ static void _CommonInit(AJRImageView *self) {
 	return self;
 }
 
+- (void)dealloc {
+	[self removeObserver:self forKeyPath:_AJRImageViewScrollViewMagnificationKey context:(void*)&_AJRImageViewMagnificationContext];
+}
+
 - (void)awakeFromNib {
 	CALayer *sublayer = [CALayer layer];
 	[sublayer setAnchorPoint:CGPointMake(0,0)];
@@ -66,40 +79,24 @@ static void _CommonInit(AJRImageView *self) {
 	[sublayer setFrame:CGRectMake(100., 100., 100., 100.)];
 	[sublayer setActions:@{kCATransition: [NSNull null], @"sublayers": [NSNull null], @"bounds" : [NSNull null], @"position": [NSNull null]}];
 
-	[[self layer] addSublayer:sublayer];
+	[_containerLayer addSublayer:sublayer];
+	[[self enclosingScrollView] addObserver:self forKeyPath:_AJRImageViewScrollViewMagnificationKey options:NSKeyValueObservingOptionNew context:(void*)&_AJRImageViewMagnificationContext];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	if (context == &_AJRImageViewMagnificationContext) {
+		CGFloat magnification = [change[NSKeyValueChangeNewKey] floatValue];
+
+		CATransform3D transform = CATransform3DMakeScale(magnification, magnification, 1.);
+		[_containerLayer setTransform:transform];
+	}
+	else {
+		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+	}
 }
 
 - (BOOL)translatesAutoresizingMaskIntoConstraints {
 	return YES;
-}
-
-- (void)layoutSublayersOfLayer:(CALayer *)layer {
-	[CATransaction disableActions];
-	if (layer == [self layer]) {
-		CGFloat w_scale = [self.layer bounds].size.width/_imageSize.width;
-		CGFloat h_scale = [self.layer bounds].size.height/_imageSize.height;
-
-		[[layer sublayers] enumerateObjectsUsingBlock:^(CALayer * obj, NSUInteger idx, BOOL *stop) {
-			
-			CGPoint constraintPoint = {.x = 100., .y = 100.};
-
-			CGFloat width = 100.;
-			CGFloat height = 100.;
-		
-			NSArray* constraints = @[
-			[CAConstraint constraintWithAttribute:kCAConstraintMinX relativeTo:@"superlayer" attribute:kCAConstraintMinX offset:constraintPoint.x*w_scale],
-				[CAConstraint constraintWithAttribute:kCAConstraintMinY relativeTo:@"superlayer" attribute:kCAConstraintMinY offset:constraintPoint.y*h_scale],
-				[CAConstraint constraintWithAttribute:kCAConstraintWidth relativeTo:@"superlayer" attribute:kCAConstraintWidth scale:0. offset:w_scale*width],
-				[CAConstraint constraintWithAttribute:kCAConstraintHeight relativeTo:@"superlayer" attribute:kCAConstraintHeight scale:0. offset:h_scale*height]];
-
-
-			
-
-			[obj setConstraints:constraints];
-		}];
-		[[CAConstraintLayoutManager layoutManager] layoutSublayersOfLayer:layer];
-	}
-	[CATransaction commit];
 }
 
 @end
