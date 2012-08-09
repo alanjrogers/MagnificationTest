@@ -13,6 +13,10 @@
 		F64D8FF915C818C900EB03A5 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F64D8FF715C818C900EB03A5 /* Credits.rtf */; };
 		F64D8FFC15C818C900EB03A5 /* AJRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F64D8FFB15C818C900EB03A5 /* AJRAppDelegate.m */; };
 		F64D8FFF15C818C900EB03A5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F64D8FFD15C818C900EB03A5 /* MainMenu.xib */; };
+		F64D900715C8192D00EB03A5 /* AJRImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F64D900615C8192D00EB03A5 /* AJRImageView.m */; };
+		F64D900915C81B7F00EB03A5 /* yoda.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F64D900815C81B7F00EB03A5 /* yoda.jpg */; };
+		F64D900B15C81C3800EB03A5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F64D900A15C81C3800EB03A5 /* QuartzCore.framework */; };
+		F64D900E15C81D9E00EB03A5 /* AJRLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F64D900D15C81D9E00EB03A5 /* AJRLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +33,12 @@
 		F64D8FFA15C818C900EB03A5 /* AJRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AJRAppDelegate.h; sourceTree = "<group>"; };
 		F64D8FFB15C818C900EB03A5 /* AJRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AJRAppDelegate.m; sourceTree = "<group>"; };
 		F64D8FFE15C818C900EB03A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F64D900515C8192D00EB03A5 /* AJRImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJRImageView.h; sourceTree = "<group>"; };
+		F64D900615C8192D00EB03A5 /* AJRImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJRImageView.m; sourceTree = "<group>"; };
+		F64D900815C81B7F00EB03A5 /* yoda.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yoda.jpg; sourceTree = "<group>"; };
+		F64D900A15C81C3800EB03A5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F64D900C15C81D9E00EB03A5 /* AJRLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJRLayer.h; sourceTree = "<group>"; };
+		F64D900D15C81D9E00EB03A5 /* AJRLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJRLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F64D900B15C81C3800EB03A5 /* QuartzCore.framework in Frameworks */,
 				F64D8FE915C818C900EB03A5 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,6 +74,7 @@
 		F64D8FE715C818C900EB03A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F64D900A15C81C3800EB03A5 /* QuartzCore.framework */,
 				F64D8FE815C818C900EB03A5 /* Cocoa.framework */,
 				F64D8FEA15C818C900EB03A5 /* Other Frameworks */,
 			);
@@ -86,6 +98,10 @@
 				F64D8FFB15C818C900EB03A5 /* AJRAppDelegate.m */,
 				F64D8FFD15C818C900EB03A5 /* MainMenu.xib */,
 				F64D8FEF15C818C900EB03A5 /* Supporting Files */,
+				F64D900515C8192D00EB03A5 /* AJRImageView.h */,
+				F64D900615C8192D00EB03A5 /* AJRImageView.m */,
+				F64D900C15C81D9E00EB03A5 /* AJRLayer.h */,
+				F64D900D15C81D9E00EB03A5 /* AJRLayer.m */,
 			);
 			path = MagnificationTest;
 			sourceTree = "<group>";
@@ -93,6 +109,7 @@
 		F64D8FEF15C818C900EB03A5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F64D900815C81B7F00EB03A5 /* yoda.jpg */,
 				F64D8FF015C818C900EB03A5 /* MagnificationTest-Info.plist */,
 				F64D8FF115C818C900EB03A5 /* InfoPlist.strings */,
 				F64D8FF415C818C900EB03A5 /* main.m */,
@@ -157,6 +174,7 @@
 				F64D8FF315C818C900EB03A5 /* InfoPlist.strings in Resources */,
 				F64D8FF915C818C900EB03A5 /* Credits.rtf in Resources */,
 				F64D8FFF15C818C900EB03A5 /* MainMenu.xib in Resources */,
+				F64D900915C81B7F00EB03A5 /* yoda.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +187,8 @@
 			files = (
 				F64D8FF515C818C900EB03A5 /* main.m in Sources */,
 				F64D8FFC15C818C900EB03A5 /* AJRAppDelegate.m in Sources */,
+				F64D900715C8192D00EB03A5 /* AJRImageView.m in Sources */,
+				F64D900E15C81D9E00EB03A5 /* AJRLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
