@@ -1295,7 +1295,7 @@
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{335, 390}, {480, 360}}</string>
-				<int key="NSWTFlags">1954021376</int>
+				<int key="NSWTFlags">880279552</int>
 				<string key="NSWindowTitle">MagnificationTest</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
@@ -1345,6 +1345,7 @@
 									<string key="NSFrame">{{464, 0}, {16, 360}}</string>
 									<reference key="NSSuperview" ref="350935249"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:15</string>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									<reference key="NSTarget" ref="350935249"/>

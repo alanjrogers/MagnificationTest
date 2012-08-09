@@ -14,14 +14,13 @@ static NSString * const _AJRImageViewScrollViewMagnificationKey = @"magnificatio
 
 @implementation AJRImageView {
 	CALayer *_containerLayer;
-	CGSize _imageSize;
+	__weak NSScrollView *_observingScrollView;
 }
 
 static void _CommonInit(AJRImageView *self) {
 	NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"yoda" withExtension:@"jpg"];
 	NSImage *image = [[NSImage alloc] initWithContentsOfURL:imageURL];
 
-	self->_imageSize = [image size];
 	CGRect frame = [self frame];
 	frame.size = [image size];
 	[self setFrame:frame];
@@ -38,12 +37,20 @@ static void _CommonInit(AJRImageView *self) {
 
 	self->_containerLayer = [CALayer layer];
 	[self->_containerLayer setAnchorPoint:CGPointZero];
-	[self->_containerLayer setFrame:CGRectMake(0., 0., self->_imageSize.width, self->_imageSize.height)];
+	[self->_containerLayer setFrame:CGRectMake(0., 0., [image size].width, [image size].height)];
 	[self->_containerLayer setContents:image];
 	[self->_containerLayer setActions:@{kCATransition: [NSNull null], @"sublayers": [NSNull null], @"transform" : [NSNull null]}];
 
-
 	[[self layer] addSublayer:self->_containerLayer];
+
+	CALayer *sublayer = [CALayer layer];
+	[sublayer setAnchorPoint:CGPointMake(0,0)];
+
+	[sublayer setBackgroundColor:CGColorGetConstantColor(kCGColorWhite)];
+	[sublayer setFrame:CGRectMake(100., 100., 100., 100.)];
+	[sublayer setActions:@{kCATransition: [NSNull null], @"sublayers": [NSNull null], @"bounds" : [NSNull null], @"position": [NSNull null]}];
+
+	[self->_containerLayer addSublayer:sublayer];
 }
 
 - (id)initWithFrame:(NSRect)frameRect {
@@ -68,19 +75,16 @@ static void _CommonInit(AJRImageView *self) {
 }
 
 - (void)dealloc {
-	[self removeObserver:self forKeyPath:_AJRImageViewScrollViewMagnificationKey context:(void*)&_AJRImageViewMagnificationContext];
+	// If _observingScrollView is nil, then we don't need to stop observing it, and this is ok to silently fail
+	[_observingScrollView removeObserver:self forKeyPath:_AJRImageViewScrollViewMagnificationKey context:(void*)&_AJRImageViewMagnificationContext];
+
 }
 
-- (void)awakeFromNib {
-	CALayer *sublayer = [CALayer layer];
-	[sublayer setAnchorPoint:CGPointMake(0,0)];
-
-	[sublayer setBackgroundColor:CGColorGetConstantColor(kCGColorWhite)];
-	[sublayer setFrame:CGRectMake(100., 100., 100., 100.)];
-	[sublayer setActions:@{kCATransition: [NSNull null], @"sublayers": [NSNull null], @"bounds" : [NSNull null], @"position": [NSNull null]}];
-
-	[_containerLayer addSublayer:sublayer];
-	[[self enclosingScrollView] addObserver:self forKeyPath:_AJRImageViewScrollViewMagnificationKey options:NSKeyValueObservingOptionNew context:(void*)&_AJRImageViewMagnificationContext];
+- (void)viewDidMoveToWindow {
+	if ([self enclosingScrollView] != nil) {
+		_observingScrollView = [self enclosingScrollView];
+		[[self enclosingScrollView] addObserver:self forKeyPath:_AJRImageViewScrollViewMagnificationKey options:NSKeyValueObservingOptionNew context:(void*)&_AJRImageViewMagnificationContext];
+	}
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -93,10 +97,6 @@ static void _CommonInit(AJRImageView *self) {
 	else {
 		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 	}
-}
-
-- (BOOL)translatesAutoresizingMaskIntoConstraints {
-	return YES;
 }
 
 @end
