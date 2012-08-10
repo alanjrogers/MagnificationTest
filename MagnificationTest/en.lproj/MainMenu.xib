@@ -1380,7 +1380,7 @@
 							<reference key="NSHScroller" ref="940186525"/>
 							<reference key="NSContentView" ref="828712231"/>
 							<int key="NSScrollerKnobStyle">2</int>
-							<double key="NSMinMagnification">0.25</double>
+							<double key="NSMinMagnification">1</double>
 							<double key="NSMaxMagnification">4</double>
 							<double key="NSMagnification">1</double>
 						</object>

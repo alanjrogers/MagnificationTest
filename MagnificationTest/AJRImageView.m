@@ -13,6 +13,7 @@ static NSString * const _AJRImageViewMagnificationContext = @"_AJRImageViewMagni
 static NSString * const _AJRImageViewScrollViewMagnificationKey = @"magnification";
 
 @implementation AJRImageView {
+	CGSize _imageSize;
 	CALayer *_containerLayer;
 	__weak NSScrollView *_observingScrollView;
 }
@@ -22,6 +23,7 @@ static void _CommonInit(AJRImageView *self) {
 	NSImage *image = [[NSImage alloc] initWithContentsOfURL:imageURL];
 
 	CGRect frame = [self frame];
+	self->_imageSize = [image size];
 	frame.size = [image size];
 	[self setFrame:frame];
 
@@ -84,6 +86,17 @@ static void _CommonInit(AJRImageView *self) {
 	if ([self enclosingScrollView] != nil) {
 		_observingScrollView = [self enclosingScrollView];
 		[[self enclosingScrollView] addObserver:self forKeyPath:_AJRImageViewScrollViewMagnificationKey options:NSKeyValueObservingOptionNew context:(void*)&_AJRImageViewMagnificationContext];
+
+		CGFloat magnification = 1.;
+		if (_imageSize.width > _imageSize.height) {
+			magnification = [[self enclosingScrollView] frame].size.width/_imageSize.width;
+		}
+		else {
+			magnification = [[self enclosingScrollView] frame].size.height/_imageSize.height;
+		}
+
+		[_observingScrollView setMinMagnification:magnification];
+		[_observingScrollView setMagnification:magnification];
 	}
 }
 
