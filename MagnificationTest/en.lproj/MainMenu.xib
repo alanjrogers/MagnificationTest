@@ -1329,13 +1329,8 @@
 									<string key="NSReuseIdentifierKey">_NS:11</string>
 									<reference key="NSDocView" ref="275615691"/>
 									<object class="NSColor" key="NSBGColor">
-										<int key="NSColorSpace">6</int>
-										<string key="NSCatalogName">System</string>
-										<string key="NSColorName">controlColor</string>
-										<object class="NSColor" key="NSColor">
-											<int key="NSColorSpace">3</int>
-											<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
-										</object>
+										<int key="NSColorSpace">1</int>
+										<bytes key="NSRGB">MCAwLjUwMTMwNjAwNTMgMAA</bytes>
 									</object>
 									<int key="NScvFlags">4</int>
 								</object>

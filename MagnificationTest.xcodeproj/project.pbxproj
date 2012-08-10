@@ -17,6 +17,7 @@
 		F64D900915C81B7F00EB03A5 /* yoda.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F64D900815C81B7F00EB03A5 /* yoda.jpg */; };
 		F64D900B15C81C3800EB03A5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F64D900A15C81C3800EB03A5 /* QuartzCore.framework */; };
 		F64D900E15C81D9E00EB03A5 /* AJRLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F64D900D15C81D9E00EB03A5 /* AJRLayer.m */; };
+		F6CBE29C15D4AB7800EC1456 /* screen.png in Resources */ = {isa = PBXBuildFile; fileRef = F6CBE29B15D4AB7800EC1456 /* screen.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		F64D900A15C81C3800EB03A5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F64D900C15C81D9E00EB03A5 /* AJRLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJRLayer.h; sourceTree = "<group>"; };
 		F64D900D15C81D9E00EB03A5 /* AJRLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJRLayer.m; sourceTree = "<group>"; };
+		F6CBE29B15D4AB7800EC1456 /* screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		F64D8FEF15C818C900EB03A5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F6CBE29B15D4AB7800EC1456 /* screen.png */,
 				F64D900815C81B7F00EB03A5 /* yoda.jpg */,
 				F64D8FF015C818C900EB03A5 /* MagnificationTest-Info.plist */,
 				F64D8FF115C818C900EB03A5 /* InfoPlist.strings */,
@@ -175,6 +178,7 @@
 				F64D8FF915C818C900EB03A5 /* Credits.rtf in Resources */,
 				F64D8FFF15C818C900EB03A5 /* MainMenu.xib in Resources */,
 				F64D900915C81B7F00EB03A5 /* yoda.jpg in Resources */,
+				F6CBE29C15D4AB7800EC1456 /* screen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +320,7 @@
 				F64D900415C818C900EB03A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

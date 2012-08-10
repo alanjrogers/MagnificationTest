@@ -19,7 +19,7 @@ static NSString * const _AJRImageViewScrollViewMagnificationKey = @"magnificatio
 }
 
 static void _CommonInit(AJRImageView *self) {
-	NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"yoda" withExtension:@"jpg"];
+	NSURL *imageURL = [[NSBundle mainBundle] URLForResource:@"screen" withExtension:@"png"];
 	NSImage *image = [[NSImage alloc] initWithContentsOfURL:imageURL];
 
 	CGRect frame = [self frame];
@@ -31,7 +31,7 @@ static void _CommonInit(AJRImageView *self) {
 	CALayer *backingLayer = [CALayer layer];
 	[backingLayer setAnchorPoint:CGPointMake(0., 0.)];
 	[backingLayer setFrame:[self bounds]];
-	[backingLayer setBackgroundColor:[NSColor greenColor].CGColor];
+	[backingLayer setBackgroundColor:[NSColor redColor].CGColor];
 	
 	[backingLayer setActions:@{kCATransition: [NSNull null], @"sublayers": [NSNull null]}];
 	[self setLayer:backingLayer];
